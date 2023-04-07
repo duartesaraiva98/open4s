@@ -1,0 +1,1 @@
+https://opensearch.org/docs/latest/api-reference/index-apis/create-index/

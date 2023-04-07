@@ -1,0 +1,1 @@
+name := "open4s-core"
