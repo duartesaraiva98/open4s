@@ -1,9 +1,9 @@
-import com.github.duartesaraiva98.open4s.api.CreateApi
+import com.github.duartesaraiva98.open4s.mappings.IndexMappings
 import com.github.duartesaraiva98.open4s.settings.IndexSettings
-import com.github.duartesaraiva98.open4s.{IndexAliases, IndexMappings}
+import com.github.duartesaraiva98.open4s.{IndexAliases, OpenSearchClient}
 
-import java.net.http.{HttpClient, HttpResponse}
-import javax.net.ssl.SSLContext
+import java.net.http.HttpClient
+import scala.language.experimental.macros
 
 object Main extends App {
   val host = "http://localhost"
@@ -11,16 +11,14 @@ object Main extends App {
 
   val client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).build()
 
-  val request = CreateApi(
+  val openSearchClient = new OpenSearchClient(client, host, port)
+
+  openSearchClient.createIndex(
     indexName = "test_index",
     indexSettings = IndexSettings(),
     indexMappings = IndexMappings(
       Seq()
     ),
     indexAliases = IndexAliases(Nil)
-  ).httpRequest(host, port)
-
-  val httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString)
-
-  println(httpResponse.body())
+  )
 }

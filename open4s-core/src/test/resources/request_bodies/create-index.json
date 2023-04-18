@@ -45,74 +45,98 @@
   "mappings": {
     "properties": {
       "some_boolean": {
+        "index": true,
         "type": "boolean"
       },
       "some_object": {
+        "dynamic": "true",
+        "enabled": true,
         "properties": {
           "some_boolean_2": {
+            "index": true,
             "type": "boolean"
           }
         }
       },
       "some_binary": {
+        "index": true,
         "type": "binary"
       },
       "some_ip": {
+        "index": true,
         "type": "ip"
       },
       "some_date": {
+        "index": true,
         "type": "date"
       },
       "some_integer_range": {
+        "index": true,
         "type": "integer_range"
       },
       "some_long_range": {
+        "index": true,
         "type": "long_range"
       },
       "some_double_range": {
+        "index": true,
         "type": "double_range"
       },
       "some_float_range": {
+        "index": true,
         "type": "float_range"
       },
       "some_ip_range": {
+        "index": true,
         "type": "ip_range"
       },
       "some_date_range": {
+        "index": true,
         "type": "date_range"
       },
       "some_byte": {
+        "index": true,
         "type": "byte"
       },
       "some_double": {
+        "index": true,
         "type": "double"
       },
       "some_half_float": {
+        "index": true,
         "type": "half_float"
       },
       "some_float": {
+        "index": true,
         "type": "float"
       },
       "some_integer": {
+        "index": true,
         "type": "integer"
       },
       "some_long": {
+        "index": true,
         "type": "long"
       },
       "some_short": {
+        "index": true,
         "type": "short"
       },
       "some_scaled_float": {
+        "index": true,
         "type": "scaled_float",
         "scaling_factor": 2
       },
       "some_text": {
+        "index": true,
         "type": "text"
       },
       "some_keyword": {
+        "index": true,
         "type": "keyword"
       },
       "some_token_count": {
+        "index": true,
         "type": "token_count"
       }
     }
