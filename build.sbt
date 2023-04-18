@@ -9,4 +9,6 @@ ThisBuild / libraryDependencies += "io.circe" %% "circe-generic-extras" % "0.14.
 ThisBuild / libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.15" % "test"
 ThisBuild / libraryDependencies += "org.scala-lang" % "scala-reflect" % "2.13.10"
 
+publish / skip := true
+
 val `open4s-core` = project
