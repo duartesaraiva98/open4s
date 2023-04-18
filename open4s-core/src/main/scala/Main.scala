@@ -13,6 +13,7 @@ object Main extends App {
 
   val openSearchClient = new OpenSearchClient(client, host, port)
 
+  println("Create")
   openSearchClient.createIndex(
     indexName = "test_index",
     indexSettings = IndexSettings(),
@@ -21,4 +22,10 @@ object Main extends App {
     ),
     indexAliases = IndexAliases(Nil)
   )
+  println("Close")
+  openSearchClient.closeIndex("test_index")
+  println("Open")
+  openSearchClient.openIndex("test_index")
+  println("Delete")
+  openSearchClient.deleteIndex("test_index")
 }

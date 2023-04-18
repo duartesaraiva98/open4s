@@ -13,7 +13,7 @@ case class CreateIndexApi(indexName: String, indexSettings: IndexSettings, index
 
   override val request: Api.Request = Api.Request.PUT
   override val uriPath: String = indexName
-  override val body: String = CreateIndexApi.Request(indexSettings, indexMappings, indexAliases).asJson.printWith(Printer.noSpaces.copy(dropNullValues = true))
+  override val body: Option[String] = Some(CreateIndexApi.Request(indexSettings, indexMappings, indexAliases).asJson.printWith(Printer.noSpaces.copy(dropNullValues = true)))
 }
 
 object CreateIndexApi {

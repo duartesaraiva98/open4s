@@ -10,7 +10,7 @@ import scala.util.chaining.scalaUtilChainingOps
 trait Api {
   protected val request: Api.Request
   protected val uriPath: String
-  protected val body: String
+  protected val body: Option[String]
 
   def httpRequest(host: String, port: Int): HttpRequest =
     HttpRequest
@@ -19,8 +19,8 @@ trait Api {
       .pipe(httpRequest =>
         request match {
           case Request.GET => httpRequest.GET()
-          case Request.PUT => httpRequest.PUT(BodyPublishers.ofString(body))
-          case Request.POST => httpRequest.POST(BodyPublishers.ofString(body))
+          case Request.PUT => httpRequest.PUT(BodyPublishers.ofString(body.getOrElse("")))
+          case Request.POST => httpRequest.POST(BodyPublishers.ofString(body.getOrElse("")))
           case Request.DELETE => httpRequest.DELETE()
         }
       )
