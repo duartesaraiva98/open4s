@@ -3,7 +3,6 @@ import com.github.duartesaraiva98.open4s.settings.IndexSettings
 import com.github.duartesaraiva98.open4s.{IndexAliases, OpenSearchClient}
 
 import java.net.http.HttpClient
-import scala.language.experimental.macros
 
 object Main extends App {
   val host = "http://localhost"

@@ -6,18 +6,19 @@ import io.circe.generic.semiauto
 
 sealed trait Params
 
-
 object Params {
 
-  implicit val encoder: Encoder[Params] = {
-    case b: Base => b.asJson(semiauto.deriveEncoder[Base])
-  }
+  implicit val objectParamsEncoder: Encoder[Object] = semiauto.deriveEncoder
 
-  implicit val objectEncoder: Encoder[Object] = semiauto.deriveEncoder
+  implicit val encoder: Encoder[Params] = {
+    case b: Base   => b.asJson(semiauto.deriveEncoder[Base])
+    case o: Object => o.asJson(objectParamsEncoder)
+  }
 
   case class Base(index: scala.Boolean = true) extends Params
 
-  case class Object(dynamic: String = "true", // true || false || strict
-                    enabled: Boolean = true
-                   ) extends Params
+  case class Object(
+      dynamic: String = "true", // true || false || strict
+      enabled: Boolean = true
+  ) extends Params
 }
