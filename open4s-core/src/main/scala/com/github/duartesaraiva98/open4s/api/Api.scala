@@ -22,6 +22,7 @@ trait Api {
           case Request.PUT    => httpRequest.PUT(body.map(BodyPublishers.ofString).getOrElse(BodyPublishers.noBody()))
           case Request.POST   => httpRequest.POST(body.map(BodyPublishers.ofString).getOrElse(BodyPublishers.noBody()))
           case Request.DELETE => httpRequest.DELETE()
+          case Request.HEAD   => httpRequest.HEAD()
         }
       )
       .build()
@@ -35,5 +36,6 @@ object Api {
     case object PUT extends Request
     case object POST extends Request
     case object DELETE extends Request
+    case object HEAD extends Request
   }
 }
