@@ -7,13 +7,22 @@ import io.circe.generic.extras.semiauto.deriveConfiguredEncoder
 import io.circe.{Encoder, Printer}
 import io.circe.syntax.EncoderOps
 
-
 // TOOD: URL Params, aliases
-case class CreateIndexApi(indexName: String, indexSettings: IndexSettings, indexMappings: IndexMappings, indexAliases: IndexAliases) extends Api {
+case class CreateIndexApi(
+    indexName: String,
+    indexSettings: IndexSettings,
+    indexMappings: IndexMappings,
+    indexAliases: IndexAliases
+) extends Api {
 
   override val request: Api.Request = Api.Request.PUT
-  override val uriPath: String = indexName
-  override val body: Option[String] = Some(CreateIndexApi.Request(indexSettings, indexMappings, indexAliases).asJson.printWith(Printer.noSpaces.copy(dropNullValues = true)))
+  override val uriPath: String      = indexName
+  override val body: Option[String] = Some(
+    CreateIndexApi
+      .Request(indexSettings, indexMappings, indexAliases)
+      .asJson
+      .printWith(Printer.noSpaces.copy(dropNullValues = true))
+  )
 }
 
 object CreateIndexApi {

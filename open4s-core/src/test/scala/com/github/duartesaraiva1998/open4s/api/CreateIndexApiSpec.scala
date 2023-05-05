@@ -11,7 +11,6 @@ import scala.io.Source
 
 class CreateIndexApiSpec extends AnyWordSpec with Matchers {
 
-
   trait Scope {
     val createApi: CreateIndexApi = CreateIndexApi(
       indexName = "test_index",
@@ -19,7 +18,8 @@ class CreateIndexApiSpec extends AnyWordSpec with Matchers {
       indexMappings = IndexMappings(
         Seq(
           IndexMappings.Type.Boolean("some_boolean"),
-          IndexMappings.Type.Object("some_object",
+          IndexMappings.Type.Object(
+            "some_object",
             IndexMappings(
               Seq(
                 IndexMappings.Type.Boolean("some_boolean_2")

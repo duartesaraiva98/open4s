@@ -14,7 +14,7 @@ trait EnumWithName extends Product {
   val upperCaseRegex: Regex = "[A-Z]".r
 
   def snakeCaseName: String = name.flatMap(char =>
-    if(char.isUpper) s"_${char.toLower}"
+    if (char.isUpper) s"_${char.toLower}"
     else char.toString
   )
 }

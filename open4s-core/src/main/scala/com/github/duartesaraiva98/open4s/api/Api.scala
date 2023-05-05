@@ -18,9 +18,9 @@ trait Api {
       .header("Content-Type", "application/json")
       .pipe(httpRequest =>
         request match {
-          case Request.GET => httpRequest.GET()
-          case Request.PUT => httpRequest.PUT(BodyPublishers.ofString(body.getOrElse("")))
-          case Request.POST => httpRequest.POST(BodyPublishers.ofString(body.getOrElse("")))
+          case Request.GET    => httpRequest.GET()
+          case Request.PUT    => httpRequest.PUT(BodyPublishers.ofString(body.getOrElse("")))
+          case Request.POST   => httpRequest.POST(BodyPublishers.ofString(body.getOrElse("")))
           case Request.DELETE => httpRequest.DELETE()
         }
       )
