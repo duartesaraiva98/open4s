@@ -9,7 +9,12 @@ import scala.util.{Failure, Success, Try}
 
 class OpenSearchClient(client: HttpClient, host: String, port: Int) {
 
-  def createIndex(indexName: String, indexSettings: IndexSettings, indexMappings: IndexMappings, indexAliases: IndexAliases): Try[Unit] =
+  def createIndex(
+      indexName: String,
+      indexSettings: IndexSettings,
+      indexMappings: IndexMappings,
+      indexAliases: IndexAliases
+  ): Try[Unit] =
     execute(CreateIndexApi(indexName, indexSettings, indexMappings, indexAliases))
 
   def deleteIndex(indexName: String): Try[Unit] = execute(DeleteIndexApi(indexName))
@@ -18,7 +23,9 @@ class OpenSearchClient(client: HttpClient, host: String, port: Int) {
 
   def openIndex(indexName: String): Try[Unit] = execute(OpenIndexApi(indexName))
 
-  private def execute(api: Api) = Try(client.send(api.httpRequest(host, port), HttpResponse.BodyHandlers.ofString)) match {
+  private def execute(api: Api) = Try(
+    client.send(api.httpRequest(host, port), HttpResponse.BodyHandlers.ofString)
+  ) match {
     case Failure(exception) =>
       println(exception) // TODO: Make logger
       Success(())

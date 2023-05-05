@@ -8,7 +8,7 @@ object RefreshInterval {
   val default: Enabled = Enabled(Period.oneSecond)
 
   implicit val encoder: Encoder[RefreshInterval] = {
-    case Disabled => Json.fromString("-1")
+    case Disabled        => Json.fromString("-1")
     case Enabled(period) => Json.fromString(period.asString)
   }
 

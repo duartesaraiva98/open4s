@@ -4,13 +4,12 @@ import com.github.duartesaraiva98.open4s.IndexAliases
 import com.github.duartesaraiva98.open4s.api.CreateIndexApi
 import com.github.duartesaraiva98.open4s.mappings.IndexMappings
 import com.github.duartesaraiva98.open4s.settings.IndexSettings
-import org.scalatest.matchers.should.Matchers
-import org.scalatest.wordspec.AnyWordSpec
 
+import java.net.http.HttpRequest
+import java.net.http.HttpRequest.BodyPublishers
 import scala.io.Source
 
-class CreateIndexApiSpec extends AnyWordSpec with Matchers {
-
+class CreateIndexApiSpec extends ApiSpec {
 
   trait Scope {
     val createApi: CreateIndexApi = CreateIndexApi(
@@ -19,7 +18,8 @@ class CreateIndexApiSpec extends AnyWordSpec with Matchers {
       indexMappings = IndexMappings(
         Seq(
           IndexMappings.Type.Boolean("some_boolean"),
-          IndexMappings.Type.Object("some_object",
+          IndexMappings.Type.Object(
+            "some_object",
             IndexMappings(
               Seq(
                 IndexMappings.Type.Boolean("some_boolean_2")
@@ -53,10 +53,20 @@ class CreateIndexApiSpec extends AnyWordSpec with Matchers {
   }
 
   "CreateApi" should {
-    "create body" in new Scope {
+    "build request" in new Scope {
       val jsonWithoutSpacesOrNewLines: String =
-        Source.fromResource("request_bodies/create-index.json").mkString.replace(" ", "").replace("\n", "")
-      createApi.body shouldBe jsonWithoutSpacesOrNewLines
+        Source
+          .fromResource("request_bodies/create-index.json")
+          .mkString
+          .replace(" ", "")
+          .replace("\n", "")
+
+      val expectedRequest: HttpRequest = baseRequestBuilder("test_index")
+        .PUT(BodyPublishers.ofString(jsonWithoutSpacesOrNewLines))
+        .build()
+
+      createApi
+        .httpRequest(host, port) shouldBe expectedRequest
     }
   }
 
