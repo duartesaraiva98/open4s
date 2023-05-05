@@ -19,8 +19,8 @@ trait Api {
       .pipe(httpRequest =>
         request match {
           case Request.GET    => httpRequest.GET()
-          case Request.PUT    => httpRequest.PUT(BodyPublishers.ofString(body.getOrElse("")))
-          case Request.POST   => httpRequest.POST(BodyPublishers.ofString(body.getOrElse("")))
+          case Request.PUT    => httpRequest.PUT(body.map(BodyPublishers.ofString).getOrElse(BodyPublishers.noBody()))
+          case Request.POST   => httpRequest.POST(body.map(BodyPublishers.ofString).getOrElse(BodyPublishers.noBody()))
           case Request.DELETE => httpRequest.DELETE()
         }
       )

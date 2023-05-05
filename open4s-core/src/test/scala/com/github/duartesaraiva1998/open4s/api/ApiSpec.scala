@@ -7,7 +7,7 @@ import java.net.URI
 import java.net.http.HttpRequest
 
 trait ApiSpec extends AnyWordSpec with Matchers {
-  val host = "http://localhost"
+  val host: String = "http://localhost"
   val port: Int    = 9200
 
   def baseRequestBuilder(uriPath: String): HttpRequest.Builder =
