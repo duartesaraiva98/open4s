@@ -9,4 +9,3 @@ object Query extends CodecConfig {
 }
 
 case class Query(defaultField: Seq[String])
-

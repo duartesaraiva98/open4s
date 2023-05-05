@@ -9,4 +9,3 @@ object Routing extends CodecConfig {
 }
 
 case class Routing(allocation: Allocation, rebalance: Rebalance)
-
